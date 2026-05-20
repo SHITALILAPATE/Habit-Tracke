@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habit Tracker </title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js" defer></script>
+</head>
+<body>
+  <div class="bg-orb orb-1"></div>
+  <div class="bg-orb orb-2"></div>
+
+  <header class="topbar glass">
+    <div class="brand">
+      <span class="logo">🌿</span>
+      <h1>Habitly</h1>
+    </div>
+    <nav class="actions">
+      <span class="hello">Hi, <strong>{{ username }}</strong></span>
+      <button id="themeToggle" class="icon-btn" title="Toggle theme">🌓</button>
+      <a href="{{ url_for('logout') }}" class="ghost-btn">Logout</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="quote glass" id="quoteCard">
+      <p id="quoteText">"Small steps every day."</p>
+    </section>
+
+    <section class="stats">
+      <div class="stat glass">
+        <span class="label">Today's progress</span>
+        <div class="progress-wrap">
+          <div class="progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+          <span id="progressText" class="progress-text">0%</span>
+        </div>
+      </div>
+      <div class="stat glass">
+        <span class="label">Completed today</span>
+        <span class="value"><span id="doneCount">0</span> / <span id="totalCount">0</span></span>
+      </div>
+      <div class="stat glass">
+        <span class="label">Best streak</span>
+        <span class="value">🔥 <span id="bestStreak">0</span></span>
+      </div>
+    </section>
+
+    <section class="manage glass">
+      <h2>Add a new habit</h2>
+      <form id="habitForm" class="habit-form">
+        <input id="emojiInput" type="text" maxlength="2" placeholder="🌱" />
+        <input id="nameInput" type="text" placeholder="e.g. Read 20 minutes" required />
+        <button type="submit" class="primary-btn">Add habit</button>
+      </form>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>Your habits</h2>
+        <span class="muted" id="emptyHint" hidden>No habits yet — add your first one above.</span>
+      </div>
+      <ul id="habitList" class="habit-grid"></ul>
+    </section>
+  </main>
+
+  <audio id="dingSound" preload="auto">
+    <source src="https://cdn.jsdelivr.net/gh/naptha/tesseract.js@master/tests/assets/ding.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
